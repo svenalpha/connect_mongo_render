@@ -1,0 +1,56 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs")  %>
+<body>
+<%- include("./partials/nav.ejs")  %>
+ 
+<div class= "detail content">
+  <h2><%=blog.title%></h2>
+  <div class="content">
+  <p><%=blog.body%></p>
+  </div>
+  <a class="delete" data-doc="<%= blog._id %>">delete</a>
+  
+  <a class="update" data-doc="<%= blog %>" data-doc_id="<%= blog._id %>"  data-doc_title="<%= blog.title %>" data-doc_snippet="<%= blog.snippet %>" data-doc_body="<%= blog.body %>" >uppppdate</a>
+  <a class="extra1" data-doc="<%= blog %>" href="/extra1" >extra1</a>
+
+  /* href="/update" */
+  
+</div>
+<%- include("./partials/footer.ejs")  %> 
+
+<script>  /* <script> runs on the front end    */
+
+/* delete  */
+const trashcan =document.querySelector("a.delete"); /* ie first of class delete in an a element*/
+trashcan.addEventListener("click",(e)=>
+ {console.log("deletinggg");
+   const endPoint= `/blogs/${trashcan.dataset.doc}`;             
+  fetch(endPoint,{method: "DELETE"})  /*AJAX request. Cannot return a redirect directly*/                  
+    .then((response)=>response.json()) /* to parse json into javascript*/                               
+    .then((data)=> {window.location.href=data.redirect}) /*{console.log("preee dataaaa");console.log(data);console.log("posttt dataaa");}) */                        
+    .catch((error)=>{console.log(error);});           
+ }                       );             
+                       
+ /*update*/    
+const updater =document.querySelector("a.update"); /* ie first of class delete in an a element*/
+updater.addEventListener("click",(e)=>
+ {e.preventDefault();
+console.log("in detail iiiin event listener");
+localStorage.setItem('idxx', JSON.stringify(`${updater.dataset.doc_id}`));
+localStorage.setItem('titlexx', JSON.stringify(`${updater.dataset.doc_title}`));
+localStorage.setItem('titlexxCh',0);  // ie changed(1) or not(0)
+localStorage.setItem('snippetxx', JSON.stringify(`${updater.dataset.doc_snippet}`));      
+localStorage.setItem('snippetxxCh',0);
+localStorage.setItem('bodyxx', JSON.stringify(`${updater.dataset.doc_body}`));     
+localStorage.setItem('bodyxxCh',0);
+window.location.href="/update"; //.redirect";  // __dirname ???
+ });
+
+</script>
+
+</body>
+</html>

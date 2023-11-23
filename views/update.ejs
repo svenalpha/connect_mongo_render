@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs")  %>
+
+<body>
+  <%- include("./partials/nav.ejs")  %>
+  <h4>above blog title</h4>
+  <h4>blog.title</h4>
+  <h4><%=blog.title%></h4>
+  <% const str = "banana" %>   
+  <p><%= str %></p>
+  <p id="biscuit" class="cake">wobblt</p>
+
+
+      <div class= "create-blog content">
+        <form action="/blogs" method="POST">
+        <label for="title">blog title</label>
+        <input type="text" name="title" id="title" class="title" required> 
+        <label for="snippet">blog snippet:</label>      
+        <%# <input type="text" name="snippet" id="snippet" class="snippet" onchange="alert(this.value)" required> %>         
+        <input type="text" name="snippet" id="snippet" class="snippet" required>
+        <label for="body">blog body:</label>
+        <textarea name="body" id="body" class="body" required></textarea>
+        <button class="btn_submit">submit</button>
+        </form>
+      </div>
+      <%- include("./partials/footer.ejs")  %>  
+
+      
+  <script>
+document.querySelector(".title").addEventListener("change",(e)=> {localStorage.setItem('titlexxCh',1);});
+document.querySelector(".snippet").addEventListener("change",(e)=> {localStorage.setItem('snippetxxCh',1);});
+document.querySelector(".body").addEventListener("change",(e)=> {localStorage.setItem('bodyxxCh',1);});
+
+document.querySelector(".btn_submit").addEventListener("click",(e)=>
+ {e.preventDefault();    //console.log("in update, click .btn_submit");
+  var fd = new FormData();
+  if (localStorage.getItem('titlexxCh')==1) fd.append("title", document.getElementById("title").value);
+  if (localStorage.getItem('snippetxxCh')==1) fd.append("snippet", document.getElementById("snippet").value);
+  if (localStorage.getItem('bodyxxCh')==1) fd.append("body", document.getElementById("body").value);
+  
+  //for (let key of fd.keys()) {console.log(key,fd.get(key));}  // to iterate through FormData() 
+ 
+  let isFDEmpty= true; for (let p of fd) {isFDEmpty= false; break;} // ie have any fields been altered
+
+  if (isFDEmpty == true)   // ie no changes made to form
+   {alert("no changes to save");  //  some sort of message "no changes made"
+    localStorage.removeItem("idxx");  //put delete localStorage values 
+    localStorage.removeItem("titlexx"); localStorage.removeItem("snippetxx"); localStorage.removeItem("bodyxx");
+    localStorage.removeItem("titlexxCh"); localStorage.removeItem("snippetxxCh"); localStorage.removeItem("bodyxxCh");
+    window.location.href="/blogs";     // go to blogs 
+   }else   // ie changes made to form
+   {//const idxx = JSON.parse(localStorage.getItem("idxx"));// insert id into form
+    fd.append("id",  JSON.parse(localStorage.getItem("idxx")) );  
+   
+    fetch("/update",{method: "PUT", body: fd }) 
+      .then((response)=>response.json()) // to parse json into javascript
+      .then((response)=> {localStorage.removeItem("idxx");  //put delete localStorage values 
+                          localStorage.removeItem("titlexx"); localStorage.removeItem("snippetxx"); localStorage.removeItem("bodyxx");
+                          localStorage.removeItem("titlexxCh"); localStorage.removeItem("snippetxxCh"); localStorage.removeItem("bodyxxCh");
+          window.location.href=response.redirect;}) //.redirect";  // __dirname ???    .then((data)=> {window.location.href=data.redirect}) //{console.log("preee dataaaa");console.log(data);console.log("posttt dataaa");})        
+      .catch((error)=>{console.log(error);});
+   }  // end else 
+ });  //  end  document.querySelector(".btn_submit").addEventListener("click",(e)=>                                 
+                                     
+function doOnLoad() 
+ {document.getElementById("title").value = JSON.parse(localStorage.getItem("titlexx")); 
+  document.getElementById("snippet").value = JSON.parse(localStorage.getItem("snippetxx")); 
+  document.getElementById("body").value = JSON.parse(localStorage.getItem("bodyxx"));      
+          
+  //const updater =document.querySelector(".cake");
+  //updater.innerHTML="Mary had a little lamb"
+ }    // end alertFunction
+window.onload = doOnLoad();
+  </script>    
+</body>
+</html>
