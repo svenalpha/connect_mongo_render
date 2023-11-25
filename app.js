@@ -18,12 +18,12 @@ const app = express();
 //  in password:654321@a ; may need to escape @ with %40 , password changed to : 6j5pbHRxwLanqaq4   
 
 
-//const dbURI='mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority';                                                                                                                       
-//mongoose.connect(dbURI, {UseNewUrlParser: true,UseUnifiedTopology:true})                                                                                                                                       
-// .then((result)=>{app.listen(process.env.PORT || 3333); //ie localhost:3333 
-//                  console.log("connected to daaaata base");
-//                 })
-// .catch((err)=>console.log(err));
+const dbURI='mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority';                                                                                                                       
+mongoose.connect(dbURI, {UseNewUrlParser: true,UseUnifiedTopology:true})                                                                                                                                       
+ .then((result)=>{app.listen(process.env.PORT || 3333); //ie localhost:3333 
+                  console.log("connected to daaaata base");
+                 })
+ .catch((err)=>console.log(err));
 
 app.use(express.json());
 app.set("view engine","ejs");
@@ -51,7 +51,7 @@ app.get("/",(req,res)=>
 */
 
  /* practice create new blog/ 
- app.get("/add-blog",(req,res)=>
+app.get("/add-blog",(req,res)=>
   {const blog1=new Blag({title: "new blog 2",
                           snippet: "2about new blog2",
                           body: "2much more on2 my new blog2"
@@ -71,7 +71,7 @@ app.get("/all-blogs",(req,res)=>
  }     );
  end practice get all blogs  */
 
-/* practice get single blog  
+/* practice get single blog   /  
 app.get("/single-blog",(req,res)=>
  {Blag.findById("61c3309d347f804d768d5c7d")
     .then((result)=>{res.send(result);})
@@ -79,18 +79,18 @@ app.get("/single-blog",(req,res)=>
  }     );
 end practice get single blog  */
 
-//app.get("/",(req,res)=>{res.redirect("/blogs");});
+app.get("/",(req,res)=>{res.redirect("/blogs");});
 
-app.get("/",(req,res)=>
- {console.log("in abouttttt");
-  res.render("about",{titlex: "not aboout" });
- });
-
-
-//app.get("/about",(req,res)=>
+//app.get("/",(req,res)=>
 // {console.log("in abouttttt");
-//  res.render("about",{titlex: "aboout" });
+//  res.render("about",{titlex: "not aboout" });
 // });
+
+
+app.get("/about",(req,res)=>
+ {console.log("in abouttttt");
+  res.render("about",{titlex: "aboout" });
+ });
 
  app.get("/extra1",(req,res)=>
  {console.log("in exxxxxtra1");
@@ -112,13 +112,16 @@ app.get("/update",(req,res)=>
  });
 
 /* to get all blogs    */
-//app.get("/blogs",(req,res)=>
-// {console.log("in get blogs before console.log(req.body)")
-//    console.log(req.body);
-//    Blag.find().sort({createdAt: -1}) /* sort to go from newest to oldest */
-//    .then((result)=>{res.render("index",{titlex: "All Blogs",blogs: result});})
-//    .catch((error)=>{console.log(error);}); 
-// }     );
+app.get("/blogs",(req,res)=>
+ {console.log("in get blogs before console.log(req.body)")
+    console.log(req.body);
+    res.render("index",{titlex: "All Blogs"});
+
+   // Blag.find().sort({createdAt: -1}) /* sort to go from newest to oldest */
+   // .then((result)=>{res.render("index",{titlex: "All Blogs",blogs: result});})
+   // .catch((error)=>{console.log(error);}); 
+
+ }     );
 
  /* to create new entry */
 app.post("/blogs",(req,res)=>
