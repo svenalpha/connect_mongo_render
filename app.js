@@ -4,7 +4,8 @@ Node.js Crash Course Tutorial #9  https://www.youtube.com/watch?v=bxsemcrY4gQ
 Node.js Crash Course Tutorial #10  https://www.youtube.com/watch?v=VVGgacjzc2Y
 */
 
-const express = require("express");  
+  const express = require("express");  
+//import express from 'express';
 const morgan = require("morgan");    // requiring middleware
 const mongoose =require("mongoose");
 const Blag = require("./models/blogModel");
