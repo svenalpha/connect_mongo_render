@@ -8,9 +8,30 @@
 
   <div class="blogs content">
     <h2>all blogs</h2>
-    <h3>No.8 16:02 1/12/2023      consectetur adipisicing elit. Ducimus similique nisi iust</h3>
+    <h3>No.10 18:00 1/12/2023       consectetur adipisicing elit. Ducimus similique nisi iust</h3>
   
-   
+    <%  
+    if (blogs.length>0)
+    {
+    blogs.forEach((blog)=>
+    {  
+    %>
+     <a class="single" href="/blogs/<%=blog._id%>">
+        <h3><%=blog.title%></h3>
+        <h4><%=blog.snippet%></h4>
+        <h6><%=blog.body%></h6>
+        <h5>twelfthxxx</h5>
+     </a>    
+    <%  
+                        })                              
+      }   else {     
+    %>
+         <p>no entries</p>
+    <%   } 
+    %>  
+
+
+
 
                                                
                                                                      

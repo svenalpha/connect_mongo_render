@@ -115,12 +115,12 @@ app.get("/update",(req,res)=>
 /* to get all blogs    */
 app.get("/blogs",(req,res)=>
  {console.log("in get blogs before console.log(req.body)")
-    console.log(req.body);
-    res.render("index",{titlex: "All Blogs"});
+    //console.log(req.body);
+    //res.render("index",{titlex: "All Blogs"});
 
-   // Blag.find().sort({createdAt: -1}) /* sort to go from newest to oldest */
-   // .then((result)=>{res.render("index",{titlex: "All Blogs",blogs: result});})
-   // .catch((error)=>{console.log(error);}); 
+    Blag.find().sort({createdAt: -1}) /* sort to go from newest to oldest */
+    .then((result)=>{res.render("index",{titlex: "All Blogs",blogs: result});})
+    .catch((error)=>{console.log(error);}); 
 
  }     );
 
