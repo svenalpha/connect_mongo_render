@@ -11,7 +11,7 @@ const mongoose =require("mongoose");
 const Blag = require("./models/blogModel");
 /* userx   123456@a to  6j5pbHRxwLanqaq4   Project0*/
 const multer = require('multer'); const upload = multer(); //  to receive Formdata()
-
+require('dotenv').config();
 const app = express();
 
 //  to conceal password in env file, see TNN mern stack4 video
@@ -19,12 +19,16 @@ const app = express();
 //  in password:654321@a ; may need to escape @ with %40 , password changed to : 6j5pbHRxwLanqaq4   
 
 //let api_key = process.env['MONGO_URI_FROM_ENVX'];
-let api_key = process.env.MONGO_URI_FROM_ENVX;
-console.log("api_key = ",api_key);
+//console.log("process.env = ",process.env);  
+let api_key = process.env.MONGO_URI_FROM_ENVX; console.log("api_key = ",api_key);  
+
+//let api_key1 = process.env.'MONGO_URI_FROM_ENVX';   console.log("api_key1 = ",api_key1); 
+//let api_key2= process.env.['MONGO_URI_FROM_ENVX'];   console.log("api_key2 = ",api_key2); 
+//let api_key3 = process.env.[MONGO_URI_FROM_ENVX];     console.log("api_key3 = ",api_key3);
 const dbURI='mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority';                                                                                                                       
 //           mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority
-mongoose.connect(dbURI, {UseNewUrlParser: true,UseUnifiedTopology:true})   
-//mongoose.connect(api_key, {UseNewUrlParser: true,UseUnifiedTopology:true})                                                                                                                                   
+//mongoose.connect(dbURI, {UseNewUrlParser: true,UseUnifiedTopology:true})   
+mongoose.connect(api_key, {UseNewUrlParser: true,UseUnifiedTopology:true})                                                                                                                                   
  .then((result)=>{app.listen(process.env.PORT || 3333); //ie localhost:3333 
                   console.log("connected to daaaata base");
                  })
