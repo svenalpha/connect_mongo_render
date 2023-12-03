@@ -21,10 +21,10 @@ const app = express();
 //let api_key = process.env['MONGO_URI_FROM_ENVX'];
 let api_key = process.env.MONGO_URI_FROM_ENVX;
 console.log("api_key = ",api_key);
-//const dbURI='mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority';                                                                                                                       
+const dbURI='mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority';                                                                                                                       
 //           mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority
-//mongoose.connect(dbURI, {UseNewUrlParser: true,UseUnifiedTopology:true})   
-mongoose.connect(api_key, {UseNewUrlParser: true,UseUnifiedTopology:true})                                                                                                                                   
+mongoose.connect(dbURI, {UseNewUrlParser: true,UseUnifiedTopology:true})   
+//mongoose.connect(api_key, {UseNewUrlParser: true,UseUnifiedTopology:true})                                                                                                                                   
  .then((result)=>{app.listen(process.env.PORT || 3333); //ie localhost:3333 
                   console.log("connected to daaaata base");
                  })
