@@ -18,15 +18,13 @@ const app = express();
 //  app.listen(process.env.PORT || 3333); alternative below as part of logging in to mongoose
 //  in password:654321@a ; may need to escape @ with %40 , password changed to : 6j5pbHRxwLanqaq4   
 
-//let api_key = process.env['MONGO_URI_FROM_ENVX'];
-//console.log("process.env = ",process.env);  
 let api_key = process.env.MONGO_URI_FROM_ENVX; console.log("api_key = ",api_key);  
 
-//let api_key1 = process.env.'MONGO_URI_FROM_ENVX';   console.log("api_key1 = ",api_key1); 
-//let api_key2= process.env.['MONGO_URI_FROM_ENVX'];   console.log("api_key2 = ",api_key2); 
-//let api_key3 = process.env.[MONGO_URI_FROM_ENVX];     console.log("api_key3 = ",api_key3);
-const dbURI='mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority';                                                                                                                       
+
+
+// install dotenv , use render environment variables
 //           mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority
+//const dbURI='mongodb+srv://userx:6j5pbHRxwLanqaq4@cluster0.t8319.mongodb.net/Project0?retryWrites=true&w=majority';                                                                                                                       
 //mongoose.connect(dbURI, {UseNewUrlParser: true,UseUnifiedTopology:true})   
 mongoose.connect(api_key, {UseNewUrlParser: true,UseUnifiedTopology:true})                                                                                                                                   
  .then((result)=>{app.listen(process.env.PORT || 3333); //ie localhost:3333 
